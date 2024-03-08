@@ -1,0 +1,30 @@
+.header-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 10%; /* Adjust height as needed */
+    width: 100%; /* Full width */
+    background-color: #000046; /* Background color */
+    padding: 0 20px; /* Adjust padding as needed */
+    display: flex;
+    justify-content: space-between; /* Align items with space between */
+    align-items: center; /* Align items vertically */
+    z-index: 2;
+}
+
+.header-logo {
+    flex: 0 0 auto;
+    margin-right: 20px;
+}
+.header-logo img {
+    width: auto;
+    height: 40px; /* Set width of the logo *//* Maintain aspect ratio */
+}
+.header-profile {
+    border-radius: 50%;
+    border: 2px solid red;
+    width: 40px;
+    height: 40px;
+    color: white;
+    text-align: center;
+}

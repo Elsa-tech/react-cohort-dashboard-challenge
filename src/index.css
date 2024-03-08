@@ -1,0 +1,23 @@
+body {
+  background-color: #F0F5FA;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 20px;
+}
+h4 {
+  color: #000046;
+}
+.initial-display {
+  width: 50px; /* Adjust width as needed */
+  height: 50px; /* Adjust height as needed */
+  border-radius: 50%; /* Makes the container rounded */
+  background-color: red; /* Sets the background color to red */
+  display: flex;
+  justify-content: center; /* Centers the content horizontally */
+  align-items: center; /* Centers the content vertically */
+}
+
+.initials {
+  color: black; /* Sets the color of the initials to white */
+  font-size: 15px; /* Adjust font size as needed */
+}
+
