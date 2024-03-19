@@ -4,36 +4,15 @@ import { commentPost, getCommentsOnPost, getContactById } from "../../../http/re
 import InputForm from "./InputForm"
 import PostComments from "./PostComments"
 import Initials from "../../../components/Initials"
+import { Link } from "react-router-dom"
+import LoadingAnimation from "../../../components/LoadingAnimation"
 
 export default function PostItem({post, index}){
 
-    const { user } = useContext(DataContext)
-    const [contact, setContact] = useState({})
-    const [loading, setLoading] = useState(true)
+    const { user, contacts, addComment, fetchComments, posts } = useContext(DataContext)
     const [comments, setComments] = useState([])
-
-    useEffect(() => {
-        const fetchContact = async () => {
-            setLoading(true)
-            try {
-                const data = await getContactById(post.contactId)
-                setContact(data)
-            } catch(error){
-                console.error('error fetching contact: ', error)
-            } finally {
-                setLoading(false)
-            } 
-        }
-        fetchContact()
-    },[])
-
-    useEffect(() => {
-        const fetchComments = async () => {
-            const data = await getCommentsOnPost(post.id)
-            setComments(data)
-        }
-        fetchComments()
-    },[])
+    const cc = contacts.find(c => c.id == post.contactId)
+    const [loading, setLoading] = useState(true)
 
     const handleSubmit = async (content) =>{
         const body = {
@@ -41,29 +20,38 @@ export default function PostItem({post, index}){
             content: content,
             contactId: user.id
         }
-        commentPost(post.id, body)
+        try {
+            await addComment(post.id, body)
+            await fetchComments(post.id, setComments)
+        } catch (error) {
+            console.error('error posting or fetching comments: ', error)
+        }
     }
 
-    return (<>{loading ? (<div>Loading ...</div>) :
-        (
-    <li key={index}>
-        <div>
+    useEffect(() => {
+        fetchComments(post.id, setComments)
+        setLoading(false)
+    },[posts])
+
+    return (
+    <li key={index} className="post-item-card">
+        <div className="post-item-left-section">
+            {cc != undefined ? (<>
+            <Initials firstname={cc.firstName} lastname={cc.lastName} favouriteColour={cc.favouriteColour} />
             <div>
-                <Initials firstname={user.firstName} lastname={user.lastName} favouriteColour={user.favouriteColour} />
-                <div>
-                    <h4>{contact.firstName} {contact.lastName}</h4>
-                    <p>{post.title}</p>
-                </div>
+                <h4>{cc.firstName} {cc.lastName}</h4>
+                <Link to={`/${post.id}`}>
+                {post.title}
+                </Link>
             </div>
+            </>) : <LoadingAnimation /> }
         </div>
-        <div>
+        <div className="post-item-right-section">
             <p>{post.content}</p>
-            <hr/>
-            <PostComments comments={comments} />
+            <hr/>{loading ? <LoadingAnimation /> : <PostComments comments={comments.reverse()} />}
         </div>
         <div>
             <InputForm user={user} handleSubmit={handleSubmit} placeholder="Add a comment" name="comment" />
         </div>
     </li>)
-    }</>)
 }

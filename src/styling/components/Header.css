@@ -2,13 +2,13 @@
     position: fixed;
     top: 0;
     left: 0;
-    height: 10%; /* Adjust height as needed */
-    width: 100%; /* Full width */
-    background-color: #000046; /* Background color */
-    padding: 0 20px; /* Adjust padding as needed */
+    height: 10%; 
+    width: 100%; 
+    background-color: #000046; 
+    padding: 0 20px; 
     display: flex;
-    justify-content: space-between; /* Align items with space between */
-    align-items: center; /* Align items vertically */
+    justify-content: space-between; 
+    align-items: center; 
     z-index: 2;
 }
 
@@ -18,13 +18,9 @@
 }
 .header-logo img {
     width: auto;
-    height: 40px; /* Set width of the logo *//* Maintain aspect ratio */
+    height: 40px; 
 }
 .header-profile {
-    border-radius: 50%;
-    border: 2px solid red;
-    width: 40px;
-    height: 40px;
-    color: white;
-    text-align: center;
+    position: relative;
+    right: calc(2rem - 0px);
 }

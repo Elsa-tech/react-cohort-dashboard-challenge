@@ -27,7 +27,6 @@ const getContactById = async (id) => {
 }
 
 const postContentToList = async (body) => {
-    console.log(body)
     return await fetch(`https://boolean-api-server.fly.dev/${gitHubMaster}/post`, { 
     method: "POST", 
     body: JSON.stringify(body),
@@ -45,7 +44,17 @@ const postContentToList = async (body) => {
 }
 
 
-const getPostById = (id) => {
+const getPostById = async (id) => {
+    return await fetch(`https://boolean-api-server.fly.dev/${gitHubMaster}/post/${id}`)
+    .then((res) => {
+        return res.json()
+    })
+    .then((data) => {
+        return data
+    })
+    .catch((error) => {
+        console.error('could not fetch post by id', error)
+    }) 
 
 }
 
@@ -62,8 +71,8 @@ const getCommentsOnPost = async (postId) => {
     })
 }
 
-const commentPost = (postId, body) => {
-    fetch(`https://boolean-api-server.fly.dev/${gitHubMaster}/post/${postId}/comment`, {
+const commentPost = async (postId, body) => {
+    return await fetch(`https://boolean-api-server.fly.dev/${gitHubMaster}/post/${postId}/comment`, {
         method: "POST",
         body: JSON.stringify(body),
         headers: {"Content-Type":"application/json"},
@@ -79,4 +88,17 @@ const commentPost = (postId, body) => {
     })
 }
 
-export {getPosts, getContactById, postContentToList, commentPost, getCommentsOnPost}
+const getContacts = async () => {
+    return await fetch(`https://boolean-api-server.fly.dev/${gitHubMaster}/contact`)
+    .then((res) => {
+        return res.json()
+    })
+    .then((data) => {
+        return data
+    })
+    .catch((error) => {
+        console.error('could not fetch a contacts', error)
+    })
+}
+
+export {getPosts, getContactById, postContentToList, commentPost, getCommentsOnPost, getPostById, getContacts}

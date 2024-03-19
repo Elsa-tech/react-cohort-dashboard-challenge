@@ -2,22 +2,28 @@
     position: fixed;
     top: 10%;
     left: 0;
-    height: 100%; /* Full height */
-    width: 80px; /* Adjust width as needed */
-    background-color: #333; /* Background color */
-    padding: 20px 0; /* Adjust padding as needed */
+    height: 100%;
+    width: 100px;
+    background-color: white;
     display: flex;
-    flex-direction: column; /* Align items vertically */
-    justify-content: flex-start; /* Align items to the start */
-}
-.nav-item {
-    width: 100%; /* Take up full width */
-    text-align: center; /* Center content */
-    margin-bottom: 20px;
+    flex-direction: column;
+    justify-content: flex-start;
 }
 
-.navbar-item img {
-    width: 40px; /* Adjust image width */
-    height: 40px; /* Adjust image height */
-    border-radius: 50%; /* Make it rounded */
+.nav-item {
+    width: 100%;
+    text-align: center;
+    background-color: transparent;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.nav-item a {
+    text-decoration: none;
+}
+
+.nav-item.active {
+    background-color: #e6ebf5;
 }

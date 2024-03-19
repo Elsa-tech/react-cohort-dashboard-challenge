@@ -5,7 +5,7 @@ import InputForm from "./InputForm"
 
 export default function PostContent(){
 
-    const { user, setLoading } = useContext(DataContext)
+    const { user, addPost } = useContext(DataContext)
 
     const handleSubmit = async (content) => {
         const body = {
@@ -13,7 +13,7 @@ export default function PostContent(){
             title: content,
             content: content
         }
-        await postContentToList(body)
+        addPost(body)
     }
 
     return (
